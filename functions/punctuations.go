@@ -1,28 +1,23 @@
-package piscine
+package functions
 
-/// amine      amine
-
-func trim(str string) string {
-	res := ""
-	for i, val := range str {
-		if val == ' ' && i+1 < len(str) && str[i+1] == ' ' {
-			continue
-		}
-		res += string(val)
-	}
-	return res
-}
+import (
+	"strings"
+)
 
 func Punctuations(s string) string {
-	slice := []rune(trim(s))
+	slice := []rune(s)
+// trimspace()
+	check := ".,!?:;"
 
-	punc := ".,!?:;"
 	for i, elm := range slice {
-		for _, val := range punc {
-			if (i+1 < len(slice)) && (elm == ' ' && slice[i+1] == val) {
+		for _, punc := range check { // check if we have a punc
+			if (i+1 < len(slice)) && (elm == ' ' && slice[i+1] == punc) {
 				slice[i], slice[i+1] = slice[i+1], slice[i]
 			}
 		}
 	}
-	return string(slice)
+	// fmt.Println("slice -->" + string(slice))
+	lastRes := strings.Join(SplitWhiteSpaces(string(slice)), " ")
+	// fmt.Println("res-->" + lastRes)
+	return lastRes
 }
