@@ -3,9 +3,10 @@ package functions
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
-func Flags(s string) []string {
+func Flags(s string) string {
 	slice := SplitWhiteSpaces(s)
 	fmt.Println(slice)
 	flags := []string{"(cap)", "(up)", "(low)", "(cap,", "(low,"}
@@ -54,5 +55,6 @@ func Flags(s string) []string {
 			}
 		}
 	}
-	return slice
+	str := strings.Join(slice, " ")
+	return str
 }
