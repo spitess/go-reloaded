@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-func Hundlebowel(s string) string {
+func HundlVowel(s string) string {
 	res := strings.Split(s, " ")
 	vowel := "aeiouhAEIOUH"
 	for i, str := range res {
@@ -12,7 +12,7 @@ func Hundlebowel(s string) string {
 			word := res[i+1]
 			for _, vow := range vowel {
 				if word[0] == byte(vow) {
-					res[i] = "An"
+					res[i] = res[i] + "n"
 				}
 			}
 		}
