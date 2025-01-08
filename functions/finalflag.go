@@ -1,7 +1,6 @@
 package functions
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -22,50 +21,48 @@ func Flg(s string) string {
 				slice[i-1] = ToLower(slice[i-1])
 				slice[i] = ""
 			case "(cap,":
-				getvalue := slice[i+1]
-				cleanvalue := strings.Trim(getvalue, ")")
-				v, err := strconv.Atoi(cleanvalue)
-				if err != nil || v < 0 {
-					fmt.Println("Error: Invalid Flag:", cleanvalue, err)
-				}
-				if v >= 0 && v < i {
-					start := i - v
-					for k := start; k < i; k++ {
-						slice[k] = Capitalize(slice[k])
-						slice[i] = ""
+				if strings.HasSuffix(slice[i+1], ")") {
+					getvalue := slice[i+1]
+					cleanvalue := strings.Trim(getvalue, ")")
+					v, err := strconv.Atoi(cleanvalue)
+					if err == nil && v < i && v > 0 {
+						start := i - v
+						for k := start; k < i; k++ {
+							slice[k] = Capitalize(slice[k])
+							slice[i] = ""
+						}
+						slice[i+1] = ""
 					}
-					slice[i+1] = ""
 				}
 			case "(low,":
-				getvalue := slice[i+1]
-				cleanvalue := strings.Trim(getvalue, ")")
-				v, err := strconv.Atoi(cleanvalue)
-				if err != nil || v < 0 {
-					fmt.Println("Error: Invalid Flag:", cleanvalue, err)
-				}
-				if v >= 0 && v < i {
-					start := i - v
-					for x := start; x < i; x++ {
-						slice[x] = ToLower(slice[x])
-						slice[i] = ""
+				if strings.HasSuffix(slice[i+1], ")") {
+					getvalue := slice[i+1]
+					cleanvalue := strings.Trim(getvalue, ")")
+					v, err := strconv.Atoi(cleanvalue)
+					if err == nil && v > 0 && v < i {
+						start := i - v
+						for x := start; x < i; x++ {
+							slice[x] = ToLower(slice[x])
+							slice[i] = ""
+						}
+						slice[i+1] = ""
 					}
-					slice[i+1] = ""
 				}
 			case "(up,":
-				getvalue := slice[i+1]
-				cleanvalue := strings.Trim(getvalue, ")")
-				v, err := strconv.Atoi(cleanvalue)
-				if err != nil || v < 0 {
-					fmt.Println("Error: Invalid Flag:", cleanvalue, err)
-				}
-				if v >= 0 && v < i {
-					start := i - v
-					for b := start; b < i; b++ {
-						slice[b] = ToUpper(slice[b])
-						slice[i] = ""
+				if strings.HasSuffix(slice[i+1], ")") {
+					getvalue := slice[i+1]
+					cleanvalue := strings.Trim(getvalue, ")")
+					v, err := strconv.Atoi(cleanvalue)
+					if err == nil && v > 0 && v < i {
+						start := i - v
+						for b := start; b < i; b++ {
+							slice[b] = ToUpper(slice[b])
+							slice[i] = ""
+						}
+						slice[i+1] = ""
 					}
-					slice[i+1] = ""
 				}
+
 			}
 		}
 	}

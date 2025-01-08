@@ -4,13 +4,12 @@ func SplitWhiteSpaces(str string) []string {
 	var result []string
 	word := ""
 	for _, c := range str {
-		if c == ' ' {
+		if c == ' ' || c == '\n' {
 			if word != "" {
-				result = append(result, word) 
+				result = append(result, word)
 				word = ""
 			}
-		}
-		if c != ' ' {
+		} else {
 			word += string(c)
 		}
 	}
