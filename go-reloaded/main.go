@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
+	str "strings"
 
 	goreload "goreload/functions"
 )
@@ -16,33 +16,33 @@ func main() {
 
 	}
 
-	if Args[0] != "sample.txt" || Args[1] != "result.txt" {
-		fmt.Println("Error : The file doesn't exist.")
-		return
-	}
-
 	content, err := os.ReadFile(Args[0])
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	if string(content) == "" {
-		fmt.Print("Error : The file is empty")
+
+	if Args[1] != "result.txt" {
+		fmt.Println("Error : The File Doesn't Exist.", Args[1])
 		return
 	}
-	result := []string{}
 
-	lines := strings.Split(string(content), "\n") // split with new line
-	//  line1 line2  line3
-	for _, line := range lines { // range on lines to read line by line [aaaaa,bbbbbb,cccccc]
+	if string(content) == "" {
+		fmt.Print("Error : The File Is Empty")
+		return
+	}
+
+	Resfinal := []string{}
+	slicelines := str.Split(string(content), "\n")
+	for _, line := range slicelines {
 		fllags := goreload.Hundleflg(line)
 		hexandbin := goreload.HundlHexAndBin(fllags)
 		punc := goreload.HundlPunctuations(hexandbin)
 		marks := goreload.HundleMarks(punc)
 		vowel := goreload.HundlVowel(marks)
-		result = append(result, vowel)
+		Resfinal = append(Resfinal, vowel)
 	}
 
-	os.WriteFile("result.txt", []byte(strings.Join(result, "\n")), 0o664) // [aaaaa\n,bbbbbb\n,cccccc\n]
-	fmt.Println("result---->", result)
+	os.WriteFile("result.txt", []byte(str.Join(Resfinal, "\n")), 0o664)
+	// fmt.Println("Lines---->", Resfinal)
 }

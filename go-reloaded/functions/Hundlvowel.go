@@ -1,11 +1,12 @@
 package functions
 
 import (
+	r "goreload/helpers"
 	"strings"
 )
 
 func HundlVowel(s string) string {
-	slice := SplitWhiteSpaces(s)
+	slice := r.SplitWhiteSpaces(s)
 	vowel := "aeiouhAEIOUH"
 	for i, str := range slice {
 		if str == "A" || str == "a" {

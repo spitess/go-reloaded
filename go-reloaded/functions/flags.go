@@ -1,47 +1,39 @@
 package functions
 
 import (
+	H "goreload/helpers"
 	"strconv"
 	"strings"
 )
 
 func Hundleflg(s string) string {
-	slice := SplitWhiteSpaces(s)
+	slice := H.SplitWhiteSpaces(s)
 	flags := []string{"(cap)", "(up)", "(low)", "(cap,", "(up,", "(low,"}
 	for i := 0; i < len(slice); i++ {
 		flag := slice[i]
-		if Contain(flags, flag) && i <= len(slice) {
+		if H.Contain(flags, flag) {
 			switch flag {
 			case "(cap)":
-
-				if i >= 0 {
-					slice[i] = ""
-					slice = RemoveEmptyStrings(slice)
-					if i-1 >= 0 {
-						slice[i-1] = Capitalize(slice[i-1])
-					}
+				slice[i] = ""
+				slice = H.RemoveEmptyStrings(slice)
+				if i-1 >= 0 {
+					slice[i-1] = H.Capitalize(slice[i-1])
 					i--
 				}
 			case "(up)":
-				if i >= 0 {
-					slice[i] = ""
-					slice = RemoveEmptyStrings(slice)
-					if i-1 >= 0 {
-						slice[i-1] = strings.ToUpper(slice[i-1])
-					}
+				slice[i] = ""
+				slice = H.RemoveEmptyStrings(slice)
+				if i-1 >= 0 {
+					slice[i-1] = strings.ToUpper(slice[i-1])
 					i--
 				}
-
 			case "(low)":
-				if i >= 0 {
-					slice[i] = ""
-					slice = RemoveEmptyStrings(slice)
-					if i-1 >= 0 {
-						slice[i-1] = strings.ToLower(slice[i-1])
-					}
+				slice[i] = ""
+				slice = H.RemoveEmptyStrings(slice)
+				if i-1 >= 0 {
+					slice[i-1] = strings.ToLower(slice[i-1])
 					i--
 				}
-
 			case "(cap,":
 				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") {
 					getflag := slice[i+1]
@@ -56,15 +48,14 @@ func Hundleflg(s string) string {
 							start = 0
 						}
 						for a := start; a < i; a++ {
-							slice[a] = Capitalize(slice[a])
+							slice[a] = H.Capitalize(slice[a])
 						}
 						slice[i] = ""
 						slice[i+1] = ""
-						slice = RemoveEmptyStrings(slice)
+						slice = H.RemoveEmptyStrings(slice)
 						i--
 					}
 				}
-
 			case "(up,":
 				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") {
 					getflag := slice[i+1]
@@ -84,7 +75,7 @@ func Hundleflg(s string) string {
 						}
 						slice[i] = ""
 						slice[i+1] = ""
-						slice = RemoveEmptyStrings(slice)
+						slice = H.RemoveEmptyStrings(slice)
 						i--
 					}
 
@@ -109,7 +100,7 @@ func Hundleflg(s string) string {
 						}
 						slice[i] = ""
 						slice[i+1] = ""
-						slice = RemoveEmptyStrings(slice)
+						slice = H.RemoveEmptyStrings(slice)
 						i--
 					}
 

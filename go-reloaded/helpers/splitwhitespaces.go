@@ -1,12 +1,12 @@
 package functions
 
 func SplitWhiteSpaces(str string) []string {
-	var result []string
+	slice := []string{}
 	word := ""
 	for _, c := range str {
-		if c == ' ' || c == '\n' {
+		if c == ' ' || c == '\t' || c == '\r' {
 			if word != "" {
-				result = append(result, word)
+				slice = append(slice, word)
 				word = ""
 			}
 		} else {
@@ -15,7 +15,7 @@ func SplitWhiteSpaces(str string) []string {
 	}
 
 	if word != "" {
-		result = append(result, word)
+		slice = append(slice, word)
 	}
-	return result
+	return slice
 }
