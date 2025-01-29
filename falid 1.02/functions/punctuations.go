@@ -10,7 +10,8 @@ func HundlPunctuations(s string) string {
 				slice = append(slice[:i], slice[i+1:]...)
 				i--
 			}
-			if slice[i] == v && slice[i+1] != v && slice[i+1] != ' ' {
+
+			if slice[i] == v && slice[i+1] != v && slice[i+1] != ' ' && slice[i+1] != '\'' {
 				slice = append(slice[:i+1], append(element, slice[i+1:]...)...)
 			}
 		}

@@ -7,7 +7,7 @@ import (
 	H "goreload/helpers"
 )
 
-func HundlHexAndBin(s string) string {
+func HundlHexAndBin(s string)  string {
 	slice := H.SplitWhiteSpaces(s)
 	flags := []string{"(hex)", "(bin)"}
 	for i := 0; i < len(slice); i++ {

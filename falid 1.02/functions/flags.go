@@ -9,7 +9,7 @@ import (
 
 func Hundleflg(s string) string {
 	slice := H.SplitWhiteSpaces(s)
-	
+
 	flags := []string{"(cap)", "(up)", "(low)", "(cap,", "(up,", "(low,"}
 	for i := 0; i < len(slice); i++ {
 		flag := slice[i]

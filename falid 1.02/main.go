@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
-	str "strings"
+	"strings"
 
-	goreload "goreload/functions"
+	parsing "goreload/functions/AllFunc"
 )
 
 func main() {
@@ -15,36 +15,20 @@ func main() {
 		return
 
 	}
-
 	content, err := os.ReadFile(Args[0])
-	if err != nil {
+	switch {
+	case err != nil:
 		fmt.Println(err)
 		return
-	}
-
-	if Args[1] != "result.txt" {
-		fmt.Println("Error : The File Doesn't Exist.", Args[1])
+	case !strings.HasSuffix(Args[1], ".txt"):
+		fmt.Println("Error: The output file must have a .txt extension.")
 		return
-	}
-
-	if string(content) == "" {
-		fmt.Print("Error : The File Is Empty")
+	case string(content) == "":
+		fmt.Println("Please provide valid content.")
 		return
-	}
 
-	Resfinal := []string{}
-	slicelines := str.SplitAfter(string(content), "\n")
-	for _, line := range slicelines {
-		fllags := goreload.Hundleflg(line)
-		hexandbin := goreload.HundlHexAndBin(fllags)
-		vowel := goreload.HundlVowel(hexandbin)
-		marks := goreload.HundleMarks(vowel)
-		punc := goreload.HundlPunctuations(marks)
-		Resfinal = append(Resfinal, punc)
 	}
-	newslice := []byte{}
-	for _, v := range Resfinal {
-		newslice = append(newslice, []byte(v)...)
-	}
-	os.WriteFile("result.txt", newslice, 0o664)
+	
+	parsing := parsing.AllFunc(string(content))
+	os.WriteFile(Args[1], []byte(parsing), 0o664)
 }
