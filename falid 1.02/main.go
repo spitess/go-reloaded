@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	parsing "goreload/functions/AllFunc"
+	parsing "goreload/functions"
 )
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 		return
 
 	}
-	
+
 	parsing := parsing.AllFunc(string(content))
 	os.WriteFile(Args[1], []byte(parsing), 0o664)
 }
