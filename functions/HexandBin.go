@@ -2,12 +2,11 @@ package functions
 
 import (
 	"strconv"
-	"strings"
 
 	H "goreload/helpers"
 )
 
-func HundlHexAndBin(s string)  string {
+func HundlHexAndBin(s string) string {
 	slice := H.SplitWhiteSpaces(s)
 	flags := []string{"(hex)", "(bin)"}
 	for i := 0; i < len(slice); i++ {
@@ -38,6 +37,5 @@ func HundlHexAndBin(s string)  string {
 			i--
 		}
 	}
-	res := strings.Join(slice, " ")
-	return res
+	return Convert(slice)
 }

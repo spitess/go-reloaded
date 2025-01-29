@@ -1,7 +1,6 @@
 package functions
 
 import (
-	// "fmt"
 	"strings"
 
 	H "goreload/helpers"
@@ -19,13 +18,16 @@ func HundleMarks(s string) string {
 			if count%2 == 1 {
 				if i+1 < len(slice) && H.Contain(slice[i+1:], "'") {
 					slice[i+1] = strings.Trim(slice[i+1], " ")
+					if i-1 >= 0 && slice[i-1] == " " {
+						slice[i-1] = strings.Trim(slice[i-1], " ")
+					}
 				}
 			} else {
 				if slice[i-1] == " " {
 					slice[i-1] = strings.Trim(slice[i-1], " ")
 				}
-				if i+1 < len(slice) && slice[i+1] != " " {
-					slice[i] = slice[i] + " "
+				if i+1 < len(slice) && slice[i+1] != " " && slice[i+1] != "." {
+					slice[i] += " "
 				}
 			}
 		}

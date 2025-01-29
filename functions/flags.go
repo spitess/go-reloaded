@@ -9,7 +9,6 @@ import (
 
 func Hundleflg(s string) string {
 	slice := H.SplitWhiteSpaces(s)
-
 	flags := []string{"(cap)", "(up)", "(low)", "(cap,", "(up,", "(low,"}
 	for i := 0; i < len(slice); i++ {
 		flag := slice[i]
@@ -37,7 +36,7 @@ func Hundleflg(s string) string {
 				}
 				i--
 			case "(cap,":
-				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") {
+				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") && !strings.HasSuffix(slice[i+1], " ") {
 					getflag := slice[i+1]
 					cleanflag := strings.Trim(getflag, ")")
 					v, err := strconv.Atoi(cleanflag)
@@ -59,7 +58,7 @@ func Hundleflg(s string) string {
 					}
 				}
 			case "(up,":
-				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") {
+				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") && !strings.HasSuffix(slice[i+1], "))") {
 					getflag := slice[i+1]
 					cleanflag := strings.Trim(getflag, ")")
 					v, err := strconv.Atoi(cleanflag)
@@ -82,7 +81,7 @@ func Hundleflg(s string) string {
 				}
 
 			case "(low,":
-				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") {
+				if i+1 < len(slice) && strings.HasSuffix(slice[i+1], ")") && !strings.HasSuffix(slice[i+1], "))") {
 					getflag := slice[i+1]
 					cleanflag := strings.Trim(getflag, ")")
 					v, err := strconv.Atoi(cleanflag)
@@ -108,6 +107,6 @@ func Hundleflg(s string) string {
 			}
 		}
 	}
-	res := strings.Join(slice, " ")
-	return res
+
+	return Convert(slice)
 }

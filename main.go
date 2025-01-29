@@ -17,6 +17,9 @@ func main() {
 	}
 	content, err := os.ReadFile(Args[0])
 	switch {
+
+	case !strings.HasSuffix(Args[0], ".txt"): 
+		fmt.Println("The input file must have a <.txt> extension.")
 	case err != nil:
 		fmt.Println(err)
 		return
@@ -26,7 +29,6 @@ func main() {
 	case string(content) == "":
 		fmt.Println("Please provide valid content.")
 		return
-
 	}
 
 	parsing := parsing.AllFunc(string(content))

@@ -11,7 +11,7 @@ func HundlPunctuations(s string) string {
 				i--
 			}
 
-			if slice[i] == v && slice[i+1] != v && slice[i+1] != ' ' && slice[i+1] != '\'' {
+			if slice[i] == v && slice[i+1] != v && slice[i+1] != ' ' && slice[i+1] != '\'' && slice[i+1] != '\n' {
 				slice = append(slice[:i+1], append(element, slice[i+1:]...)...)
 			}
 		}

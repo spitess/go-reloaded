@@ -1,8 +1,6 @@
 package functions
 
 import (
-	"strings"
-
 	H "goreload/helpers"
 )
 
@@ -21,5 +19,5 @@ func HundlVowel(s string) string {
 			}
 		}
 	}
-	return strings.Join(slice, " ")
+	return Convert(slice)
 }
